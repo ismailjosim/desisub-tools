@@ -1,44 +1,37 @@
-"use client";
+'use client';
 
-import Link from "next/link";
-import { authClient } from "@/lib/auth-client";
-import { useRouter } from "next/navigation";
-import {
-  Subtitles,
-  Wand2,
-  Timer,
-  Search,
-  LogOut,
-  ArrowRight,
-} from "lucide-react";
+import Link from 'next/link';
+import { authClient } from '@/lib/auth-client';
+import { useRouter } from 'next/navigation';
+import { Subtitles, Wand2, Timer, Search, LogOut, ArrowRight } from 'lucide-react';
 
 const TOOLS = [
   {
-    id: "translate",
+    id: 'translate',
     icon: Wand2,
-    label: "AI Translator",
-    description: "Translate subtitles into Bangla, Hindi, or Urdu with GPT-4o-mini.",
-    href: "/translate",
-    badge: "Coming Soon",
-    gradient: "from-primary/20 to-violet-700/10",
+    label: 'AI Translator',
+    description: 'Translate subtitles into Bangla, Hindi, or Urdu with GPT-4o-mini.',
+    href: '/translate',
+    badge: 'Coming Soon',
+    gradient: 'from-primary/20 to-violet-700/10',
   },
   {
-    id: "sync",
+    id: 'sync',
     icon: Timer,
-    label: "Sync Fixer",
-    description: "Map subtitle text onto correct timestamps instantly, in your browser.",
-    href: "/sync",
-    badge: "Coming Soon",
-    gradient: "from-emerald-600/20 to-teal-700/10",
+    label: 'Sync Fixer',
+    description: 'Map subtitle text onto correct timestamps instantly, in your browser.',
+    href: '/sync',
+    badge: 'Coming Soon',
+    gradient: 'from-emerald-600/20 to-teal-700/10',
   },
   {
-    id: "search",
+    id: 'search',
     icon: Search,
-    label: "Subtitle Search",
-    description: "Search millions of subtitles by title or IMDB ID and download in one click.",
-    href: "/search",
-    badge: "Coming Soon",
-    gradient: "from-amber-500/20 to-orange-700/10",
+    label: 'Subtitle Search',
+    description: 'Search millions of subtitles by title or IMDB ID and download in one click.',
+    href: '/search',
+    badge: 'Coming Soon',
+    gradient: 'from-amber-500/20 to-orange-700/10',
   },
 ] as const;
 
@@ -48,11 +41,10 @@ export default function DashboardPage() {
 
   async function handleLogout() {
     await authClient.signOut();
-    router.push("/login");
+    router.push('/login');
   }
 
-  const displayName =
-    session?.user?.name || session?.user?.email?.split("@")[0] || "there";
+  const displayName = session?.user?.name || session?.user?.email?.split('@')[0] || 'there';
 
   return (
     <div className="relative min-h-screen overflow-hidden bg-[hsl(240,20%,6%)]">
@@ -61,7 +53,7 @@ export default function DashboardPage() {
         className="pointer-events-none absolute inset-0"
         style={{
           background:
-            "radial-gradient(ellipse 70% 50% at 50% -10%, hsla(252,75%,52%,0.10) 0%, transparent 70%)",
+            'radial-gradient(ellipse 70% 50% at 50% -10%, hsla(252,75%,52%,0.10) 0%, transparent 70%)',
         }}
       />
 
@@ -81,9 +73,7 @@ export default function DashboardPage() {
           {/* User + logout */}
           <div className="flex items-center gap-4">
             {session?.user?.email && (
-              <span className="hidden text-sm text-white/40 sm:block">
-                {session.user.email}
-              </span>
+              <span className="hidden text-sm text-white/40 sm:block">{session.user.email}</span>
             )}
             <button
               id="dashboard-logout-btn"
@@ -131,9 +121,7 @@ export default function DashboardPage() {
               <h2 className="mb-2 font-heading text-xl font-semibold text-white/90">
                 {tool.label}
               </h2>
-              <p className="mb-6 text-sm leading-relaxed text-white/45">
-                {tool.description}
-              </p>
+              <p className="mb-6 text-sm leading-relaxed text-white/45">{tool.description}</p>
 
               <Link
                 href={tool.href}
@@ -149,8 +137,8 @@ export default function DashboardPage() {
         {/* Phase notice */}
         <div className="mt-16 rounded-2xl border border-primary/10 bg-primary/5 p-6 text-center">
           <p className="text-sm text-white/35">
-            <span className="font-semibold text-primary/60">Phase 01 complete.</span>{" "}
-            Subtitle tools are being built in Phase 02–04. Stay tuned.
+            <span className="font-semibold text-primary/60">Phase 01 complete.</span> Subtitle tools
+            are being built in Phase 02–04. Stay tuned.
           </p>
         </div>
       </main>

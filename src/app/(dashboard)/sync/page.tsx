@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import { useState, useCallback, useRef, DragEvent, ChangeEvent } from "react";
-import Link from "next/link";
-import SrtParser from "srt-parser-2";
+import { useState, useCallback, useRef, DragEvent, ChangeEvent } from 'react';
+import Link from 'next/link';
+import SrtParser from 'srt-parser-2';
 import {
   Subtitles,
   Upload,
@@ -15,7 +15,7 @@ import {
   FileText,
   ChevronDown,
   Info,
-} from "lucide-react";
+} from 'lucide-react';
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 interface SrtLine {
@@ -42,7 +42,7 @@ interface SyncedLine {
   isMismatch: boolean;
 }
 
-type FileSlot = "A" | "B";
+type FileSlot = 'A' | 'B';
 
 // ─── Helpers ─────────────────────────────────────────────────────────────────
 function parseSrt(content: string): SrtLine[] {
@@ -53,30 +53,29 @@ function parseSrt(content: string): SrtLine[] {
 function parseVtt(content: string): SrtLine[] {
   // Strip WEBVTT header and notes, then convert timestamps to SRT-like format
   const lines = content
-    .replace(/^WEBVTT.*\n?/m, "")
-    .replace(/NOTE.*?(?=\n\n|\n\d)/gs, "")
+    .replace(/^WEBVTT.*\n?/m, '')
+    .replace(/NOTE.*?(?=\n\n|\n\d)/gs, '')
     .trim();
 
   const blocks = lines.split(/\n\n+/).filter(Boolean);
   const result: SrtLine[] = [];
 
   for (const block of blocks) {
-    const rows = block.split("\n").map((l) => l.trim());
-    const timeRow = rows.find((r) => r.includes("-->"));
+    const rows = block.split('\n').map((l) => l.trim());
+    const timeRow = rows.find((r) => r.includes('-->'));
     if (!timeRow) continue;
 
-    const [startRaw, endRaw] = timeRow.split("-->").map((s) => s.trim());
+    const [startRaw, endRaw] = timeRow.split('-->').map((s) => s.trim());
     const textRows = rows.filter((r) => r !== timeRow && !r.match(/^\d+$/));
 
     // Convert VTT timestamp (HH:MM:SS.mmm or MM:SS.mmm) to SRT (HH:MM:SS,mmm)
-    const toSrt = (ts: string) =>
-      ts.replace(".", ",").padStart(12, "0:").slice(0, 12);
+    const toSrt = (ts: string) => ts.replace('.', ',').padStart(12, '0:').slice(0, 12);
 
     result.push({
       id: String(result.length + 1),
       startTime: toSrt(startRaw),
       endTime: toSrt(endRaw),
-      text: textRows.join(" "),
+      text: textRows.join(' '),
     });
   }
   return result;
@@ -84,7 +83,7 @@ function parseVtt(content: string): SrtLine[] {
 
 function formatDuration(from: string, to: string): string {
   const parse = (ts: string) => {
-    const [h, m, s] = ts.replace(",", ".").split(":").map(Number);
+    const [h, m, s] = ts.replace(',', '.').split(':').map(Number);
     return (h || 0) * 3600 + (m || 0) * 60 + (s || 0);
   };
   const secs = Math.max(0, parse(to) - parse(from));
@@ -98,25 +97,25 @@ function generateSrt(lines: SyncedLine[]): string {
   return lines
     .map(
       (l, i) =>
-        `${i + 1}\n${l.timestamp.replace(" --> ", " --> ")}\n${l.syncedText || l.originalText}`,
+        `${i + 1}\n${l.timestamp.replace(' --> ', ' --> ')}\n${l.syncedText || l.originalText}`
     )
-    .join("\n\n");
+    .join('\n\n');
 }
 
 function generateVtt(lines: SyncedLine[]): string {
   const body = lines
     .map((l) => {
-      const ts = l.timestamp.replace(/,/g, ".");
+      const ts = l.timestamp.replace(/,/g, '.');
       return `${ts}\n${l.syncedText || l.originalText}`;
     })
-    .join("\n\n");
+    .join('\n\n');
   return `WEBVTT\n\n${body}`;
 }
 
 function downloadBlob(content: string, filename: string) {
-  const blob = new Blob([content], { type: "text/plain;charset=utf-8" });
+  const blob = new Blob([content], { type: 'text/plain;charset=utf-8' });
   const url = URL.createObjectURL(blob);
-  const a = document.createElement("a");
+  const a = document.createElement('a');
   a.href = url;
   a.download = filename;
   a.click();
@@ -151,7 +150,7 @@ function DropZone({
       const f = e.dataTransfer.files[0];
       if (f) onFile(f);
     },
-    [onFile],
+    [onFile]
   );
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -159,14 +158,12 @@ function DropZone({
     if (f) onFile(f);
   };
 
-  const isA = slot === "A";
+  const isA = slot === 'A';
   const accentClass = isA
-    ? "border-primary/40 bg-primary/5 ring-primary/30"
-    : "border-emerald-500/40 bg-emerald-500/5 ring-emerald-500/30";
-  const iconColor = isA ? "text-primary" : "text-emerald-400";
-  const badgeClass = isA
-    ? "bg-primary/15 text-primary"
-    : "bg-emerald-500/15 text-emerald-400";
+    ? 'border-primary/40 bg-primary/5 ring-primary/30'
+    : 'border-emerald-500/40 bg-emerald-500/5 ring-emerald-500/30';
+  const iconColor = isA ? 'text-primary' : 'text-emerald-400';
+  const badgeClass = isA ? 'bg-primary/15 text-primary' : 'bg-emerald-500/15 text-emerald-400';
 
   return (
     <div className="flex flex-col gap-3">
@@ -200,8 +197,8 @@ function DropZone({
             dragging
               ? `scale-[1.02] ${accentClass} ring-2`
               : file
-                ? "border-white/10 bg-white/[0.03]"
-                : "border-white/10 bg-white/[0.02] hover:border-white/20 hover:bg-white/[0.04]"
+                ? 'border-white/10 bg-white/[0.03]'
+                : 'border-white/10 bg-white/[0.02] hover:border-white/20 hover:bg-white/[0.04]'
           }
         `}
       >
@@ -238,7 +235,7 @@ function DropZone({
             </div>
             <div>
               <p className="text-sm font-medium text-white/70">
-                Drop your <span className={iconColor}>.srt</span> or{" "}
+                Drop your <span className={iconColor}>.srt</span> or{' '}
                 <span className={iconColor}>.vtt</span> file
               </p>
               <p className="text-xs text-white/30 mt-1">or click to browse</p>
@@ -251,24 +248,16 @@ function DropZone({
       {meta && (
         <div className="rounded-lg border border-white/5 bg-white/[0.02] p-3 text-xs text-white/50 grid grid-cols-2 gap-2">
           <span>
-            Lines:{" "}
-            <span className="text-white/70 font-medium">{meta.lineCount}</span>
+            Lines: <span className="text-white/70 font-medium">{meta.lineCount}</span>
           </span>
           <span>
-            Duration:{" "}
-            <span className="text-white/70 font-medium">{meta.duration}</span>
+            Duration: <span className="text-white/70 font-medium">{meta.duration}</span>
           </span>
           <span className="col-span-2">
-            First:{" "}
-            <span className="font-mono text-white/60">
-              {meta.firstTimestamp}
-            </span>
+            First: <span className="font-mono text-white/60">{meta.firstTimestamp}</span>
           </span>
           <span className="col-span-2">
-            Last:{" "}
-            <span className="font-mono text-white/60">
-              {meta.lastTimestamp}
-            </span>
+            Last: <span className="font-mono text-white/60">{meta.lastTimestamp}</span>
           </span>
         </div>
       )}
@@ -304,10 +293,10 @@ export default function SyncPage() {
     file: File,
     slot: FileSlot,
     onDone: (lines: SrtLine[], meta: FileMeta) => void,
-    onError: (msg: string) => void,
+    onError: (msg: string) => void
   ) {
-    const ext = file.name.split(".").pop()?.toLowerCase();
-    if (ext !== "srt" && ext !== "vtt") {
+    const ext = file.name.split('.').pop()?.toLowerCase();
+    if (ext !== 'srt' && ext !== 'vtt') {
       onError(`Invalid format — only .srt and .vtt files are accepted.`);
       return;
     }
@@ -315,13 +304,13 @@ export default function SyncPage() {
     reader.onload = (e) => {
       const text = e.target?.result as string;
       if (!text || !text.trim()) {
-        onError("File is empty.");
+        onError('File is empty.');
         return;
       }
       try {
-        const parsed = ext === "srt" ? parseSrt(text) : parseVtt(text);
+        const parsed = ext === 'srt' ? parseSrt(text) : parseVtt(text);
         if (!parsed.length) {
-          onError("No subtitle lines found — file may be corrupted.");
+          onError('No subtitle lines found — file may be corrupted.');
           return;
         }
         const first = parsed[0];
@@ -335,10 +324,10 @@ export default function SyncPage() {
         };
         onDone(parsed, meta);
       } catch {
-        onError("Failed to parse file — timestamps may be corrupted.");
+        onError('Failed to parse file — timestamps may be corrupted.');
       }
     };
-    reader.readAsText(file, "utf-8");
+    reader.readAsText(file, 'utf-8');
   }
 
   const handleFileA = useCallback((f: File) => {
@@ -350,7 +339,7 @@ export default function SyncPage() {
     setWarning(null);
     readFile(
       f,
-      "A",
+      'A',
       (lines, meta) => {
         setLinesA(lines);
         setMetaA(meta);
@@ -358,7 +347,7 @@ export default function SyncPage() {
       (msg) => {
         setErrorA(msg);
         setFileA(null);
-      },
+      }
     );
   }, []);
 
@@ -371,7 +360,7 @@ export default function SyncPage() {
     setWarning(null);
     readFile(
       f,
-      "B",
+      'B',
       (lines, meta) => {
         setLinesB(lines);
         setMetaB(meta);
@@ -379,7 +368,7 @@ export default function SyncPage() {
       (msg) => {
         setErrorB(msg);
         setFileB(null);
-      },
+      }
     );
   }, []);
 
@@ -403,13 +392,11 @@ export default function SyncPage() {
     if (linesB.length < linesA.length) {
       const diff = linesA.length - linesB.length;
       setWarning(
-        `File B has ${diff} fewer line${diff > 1 ? "s" : ""} than File A — those lines keep File A's original text.`,
+        `File B has ${diff} fewer line${diff > 1 ? 's' : ''} than File A — those lines keep File A's original text.`
       );
     } else if (linesB.length > linesA.length) {
       const diff = linesB.length - linesA.length;
-      setWarning(
-        `File B has ${diff} extra line${diff > 1 ? "s" : ""} — they were discarded.`,
-      );
+      setWarning(`File B has ${diff} extra line${diff > 1 ? 's' : ''} — they were discarded.`);
     }
 
     setSyncedLines(result);
@@ -417,13 +404,12 @@ export default function SyncPage() {
   }
 
   // ─── Download ─────────────────────────────────────────────────────────────
-  function handleDownload(format: "srt" | "vtt") {
+  function handleDownload(format: 'srt' | 'vtt') {
     if (!syncedLines.length) return;
     setDownloading(true);
     setTimeout(() => {
-      const baseName = fileA?.name.replace(/\.(srt|vtt)$/i, "") || "synced";
-      const content =
-        format === "srt" ? generateSrt(syncedLines) : generateVtt(syncedLines);
+      const baseName = fileA?.name.replace(/\.(srt|vtt)$/i, '') || 'synced';
+      const content = format === 'srt' ? generateSrt(syncedLines) : generateVtt(syncedLines);
       downloadBlob(content, `${baseName}_synced.${format}`);
       setDownloading(false);
     }, 100);
@@ -457,7 +443,7 @@ export default function SyncPage() {
         className="pointer-events-none absolute inset-0"
         style={{
           background:
-            "radial-gradient(ellipse 70% 50% at 50% -10%, hsla(152,60%,45%,0.07) 0%, transparent 70%)",
+            'radial-gradient(ellipse 70% 50% at 50% -10%, hsla(152,60%,45%,0.07) 0%, transparent 70%)',
         }}
       />
 
@@ -491,8 +477,8 @@ export default function SyncPage() {
             Fix Subtitle Sync
           </h2>
           <p className="mt-2 text-white/45 text-base max-w-2xl">
-            Map the text from File B onto the timestamps of File A — entirely in
-            your browser. No upload, no server.
+            Map the text from File B onto the timestamps of File A — entirely in your browser. No
+            upload, no server.
           </p>
         </div>
 
@@ -502,9 +488,7 @@ export default function SyncPage() {
             <span className="flex h-6 w-6 items-center justify-center rounded-full bg-primary/15 text-xs font-bold text-primary">
               1
             </span>
-            <h3 className="font-heading text-lg font-semibold text-white/80">
-              Upload Files
-            </h3>
+            <h3 className="font-heading text-lg font-semibold text-white/80">Upload Files</h3>
           </div>
 
           <div className="grid gap-6 md:grid-cols-2">
@@ -532,9 +516,8 @@ export default function SyncPage() {
           <div className="mt-4 flex items-start gap-2 rounded-lg border border-white/5 bg-white/[0.02] px-4 py-3 text-xs text-white/35">
             <Info className="h-3.5 w-3.5 mt-0.5 shrink-0 text-white/25" />
             <p>
-              DesiSub will keep File A&apos;s timestamps and replace its text
-              with File B&apos;s text, line by line. All processing happens
-              locally — nothing is uploaded.
+              DesiSub will keep File A&apos;s timestamps and replace its text with File B&apos;s
+              text, line by line. All processing happens locally — nothing is uploaded.
             </p>
           </div>
         </section>
@@ -545,9 +528,7 @@ export default function SyncPage() {
             <span className="flex h-6 w-6 items-center justify-center rounded-full bg-primary/15 text-xs font-bold text-primary">
               2
             </span>
-            <h3 className="font-heading text-lg font-semibold text-white/80">
-              Sync
-            </h3>
+            <h3 className="font-heading text-lg font-semibold text-white/80">Sync</h3>
           </div>
 
           <button
@@ -559,13 +540,13 @@ export default function SyncPage() {
               transition-all duration-200
               ${
                 canSync
-                  ? "bg-emerald-600 hover:bg-emerald-500 hover:scale-[1.02] shadow-lg shadow-emerald-900/40"
-                  : "cursor-not-allowed bg-white/5 text-white/25"
+                  ? 'bg-emerald-600 hover:bg-emerald-500 hover:scale-[1.02] shadow-lg shadow-emerald-900/40'
+                  : 'cursor-not-allowed bg-white/5 text-white/25'
               }
             `}
           >
             <Subtitles className="h-5 w-5" />
-            {hasSynced ? "Re-sync Files" : "Sync Files"}
+            {hasSynced ? 'Re-sync Files' : 'Sync Files'}
           </button>
 
           {/* Warning banner */}
@@ -580,10 +561,7 @@ export default function SyncPage() {
           {hasSynced && !warning && (
             <div className="mt-4 flex items-center gap-2.5 rounded-xl border border-emerald-500/20 bg-emerald-500/10 px-4 py-3 text-sm text-emerald-300">
               <CheckCircle2 className="h-4 w-4 shrink-0" />
-              <p>
-                {syncedLines.length} lines synced successfully — no line count
-                mismatch.
-              </p>
+              <p>{syncedLines.length} lines synced successfully — no line count mismatch.</p>
             </div>
           )}
         </section>
@@ -596,16 +574,12 @@ export default function SyncPage() {
                 <span className="flex h-6 w-6 items-center justify-center rounded-full bg-primary/15 text-xs font-bold text-primary">
                   3
                 </span>
-                <h3 className="font-heading text-lg font-semibold text-white/80">
-                  Preview
-                </h3>
+                <h3 className="font-heading text-lg font-semibold text-white/80">Preview</h3>
               </div>
               <div className="flex items-center gap-4 text-xs text-white/35">
                 <span>{syncedLines.length} lines</span>
                 {mismatchCount > 0 && (
-                  <span className="text-amber-400">
-                    {mismatchCount} mismatched
-                  </span>
+                  <span className="text-amber-400">{mismatchCount} mismatched</span>
                 )}
               </div>
             </div>
@@ -615,9 +589,7 @@ export default function SyncPage() {
               <table className="w-full text-xs">
                 <thead>
                   <tr className="border-b border-white/5">
-                    <th className="px-4 py-3 text-left font-semibold text-white/30 w-10">
-                      #
-                    </th>
+                    <th className="px-4 py-3 text-left font-semibold text-white/30 w-10">#</th>
                     <th className="px-4 py-3 text-left font-semibold text-white/30 w-52">
                       Timestamp
                     </th>
@@ -635,27 +607,19 @@ export default function SyncPage() {
                       key={line.index}
                       className={`
                         border-b border-white/[0.03] transition-colors duration-100
-                        ${line.isMismatch ? "bg-amber-500/5" : "hover:bg-white/[0.02]"}
+                        ${line.isMismatch ? 'bg-amber-500/5' : 'hover:bg-white/[0.02]'}
                       `}
                     >
-                      <td className="px-4 py-3 font-mono text-white/25">
-                        {line.index}
-                      </td>
+                      <td className="px-4 py-3 font-mono text-white/25">{line.index}</td>
                       <td className="px-4 py-3 font-mono text-white/45 whitespace-nowrap">
-                        {line.timestamp.split(" --> ")[0]}
+                        {line.timestamp.split(' --> ')[0]}
                         <br />
-                        <span className="text-white/25">
-                          → {line.timestamp.split(" --> ")[1]}
-                        </span>
+                        <span className="text-white/25">→ {line.timestamp.split(' --> ')[1]}</span>
                       </td>
-                      <td className="px-4 py-3 text-white/50 max-w-xs">
-                        {line.originalText}
-                      </td>
+                      <td className="px-4 py-3 text-white/50 max-w-xs">{line.originalText}</td>
                       <td
                         className={`px-4 py-3 max-w-xs ${
-                          line.isMismatch
-                            ? "text-amber-400/70 italic"
-                            : "text-white/80"
+                          line.isMismatch ? 'text-amber-400/70 italic' : 'text-white/80'
                         }`}
                       >
                         {line.isMismatch ? (
@@ -694,15 +658,13 @@ export default function SyncPage() {
               <span className="flex h-6 w-6 items-center justify-center rounded-full bg-primary/15 text-xs font-bold text-primary">
                 4
               </span>
-              <h3 className="font-heading text-lg font-semibold text-white/80">
-                Download
-              </h3>
+              <h3 className="font-heading text-lg font-semibold text-white/80">Download</h3>
             </div>
 
             <div className="flex flex-wrap gap-3">
               <button
                 id="sync-download-srt-btn"
-                onClick={() => handleDownload("srt")}
+                onClick={() => handleDownload('srt')}
                 disabled={downloading}
                 className="flex items-center gap-2 rounded-xl bg-primary px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-primary/25 transition-all duration-150 hover:bg-primary/90 hover:scale-[1.02] disabled:cursor-not-allowed disabled:opacity-50"
               >
@@ -711,7 +673,7 @@ export default function SyncPage() {
               </button>
               <button
                 id="sync-download-vtt-btn"
-                onClick={() => handleDownload("vtt")}
+                onClick={() => handleDownload('vtt')}
                 disabled={downloading}
                 className="flex items-center gap-2 rounded-xl border border-white/10 bg-white/5 px-6 py-3 text-sm font-medium text-white/75 backdrop-blur-sm transition-all duration-150 hover:border-white/20 hover:bg-white/10 hover:text-white disabled:cursor-not-allowed disabled:opacity-50"
               >
@@ -721,8 +683,7 @@ export default function SyncPage() {
             </div>
 
             <p className="mt-3 text-xs text-white/30">
-              The downloaded file will have File A&apos;s timestamps and File
-              B&apos;s text.
+              The downloaded file will have File A&apos;s timestamps and File B&apos;s text.
             </p>
           </section>
         )}

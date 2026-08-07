@@ -8,22 +8,22 @@
 
 ## 1. Tech Stack
 
-| Layer | Technology | Rationale |
-|---|---|---|
-| **Framework** | Next.js 14+ (App Router) | Server Actions, Route Handlers, RSC, built-in API layer |
-| **Language** | TypeScript (strict mode) | Type safety across the full stack |
-| **UI Components** | shadcn/ui | Accessible, customizable, composable components |
-| **Styling** | Tailwind CSS | Utility-first, pairs with shadcn/ui, design token integration via `tailwind.config` |
-| **Database** | PostgreSQL | Structured relational data (users, translations, downloads) |
-| **ORM** | Prisma | Type-safe database queries, schema migrations, introspection |
-| **Authentication** | Better Auth | Modern, comprehensive auth solution with plugins and type-safety |
-| **AI Engine** | Vercel AI SDK + OpenAI `gpt-4o-mini` | Streaming responses, cost-effective batch translation |
-| **File Storage** | Cloudflare R2 | S3-compatible, free egress, cheap storage for SRT/VTT files |
-| **Subtitle Parsing** | `srt-parser-2` | Reliable SRT parsing, timestamp extraction, re-assembly |
-| **External API** | OpenSubtitles REST API v3 | Large subtitle database, search by title/IMDB ID |
-| **Validation** | Zod | Runtime type validation for API inputs and forms |
-| **Icons** | Lucide React | Consistent, modern, MIT-licensed icon set |
-| **Deployment** | Vercel | Native Next.js support, edge functions, preview deployments |
+| Layer                | Technology                           | Rationale                                                                           |
+| -------------------- | ------------------------------------ | ----------------------------------------------------------------------------------- |
+| **Framework**        | Next.js 14+ (App Router)             | Server Actions, Route Handlers, RSC, built-in API layer                             |
+| **Language**         | TypeScript (strict mode)             | Type safety across the full stack                                                   |
+| **UI Components**    | shadcn/ui                            | Accessible, customizable, composable components                                     |
+| **Styling**          | Tailwind CSS                         | Utility-first, pairs with shadcn/ui, design token integration via `tailwind.config` |
+| **Database**         | PostgreSQL                           | Structured relational data (users, translations, downloads)                         |
+| **ORM**              | Prisma                               | Type-safe database queries, schema migrations, introspection                        |
+| **Authentication**   | Better Auth                          | Modern, comprehensive auth solution with plugins and type-safety                    |
+| **AI Engine**        | Vercel AI SDK + OpenAI `gpt-4o-mini` | Streaming responses, cost-effective batch translation                               |
+| **File Storage**     | Cloudflare R2                        | S3-compatible, free egress, cheap storage for SRT/VTT files                         |
+| **Subtitle Parsing** | `srt-parser-2`                       | Reliable SRT parsing, timestamp extraction, re-assembly                             |
+| **External API**     | OpenSubtitles REST API v3            | Large subtitle database, search by title/IMDB ID                                    |
+| **Validation**       | Zod                                  | Runtime type validation for API inputs and forms                                    |
+| **Icons**            | Lucide React                         | Consistent, modern, MIT-licensed icon set                                           |
+| **Deployment**       | Vercel                               | Native Next.js support, edge functions, preview deployments                         |
 
 ---
 
@@ -222,11 +222,11 @@ model User {
   updatedAt     DateTime
   sessions      Session[]
   accounts      Account[]
-  
+
   // Custom
   translations  Translation[]
   downloads     DownloadHistory[]
-  
+
   @@unique([email])
   @@map("user")
 }
@@ -326,35 +326,40 @@ model DownloadHistory {
 ## 5. API Endpoints
 
 ### Authentication
-| Method | Endpoint | Description |
-|---|---|---|
-| ALL | `/api/v1/auth/[...all]` | Better Auth handlers (register, login, session, callback) |
+
+| Method | Endpoint                | Description                                               |
+| ------ | ----------------------- | --------------------------------------------------------- |
+| ALL    | `/api/v1/auth/[...all]` | Better Auth handlers (register, login, session, callback) |
 
 ### Subtitles
-| Method | Endpoint | Description |
-|---|---|---|
-| GET | `/api/v1/subtitles/search?q={query}&lang={lang}` | Search subtitles via OpenSubtitles |
-| GET | `/api/v1/subtitles/download?id={fileId}` | Download a subtitle file |
+
+| Method | Endpoint                                         | Description                        |
+| ------ | ------------------------------------------------ | ---------------------------------- |
+| GET    | `/api/v1/subtitles/search?q={query}&lang={lang}` | Search subtitles via OpenSubtitles |
+| GET    | `/api/v1/subtitles/download?id={fileId}`         | Download a subtitle file           |
 
 ### Translation
-| Method | Endpoint | Description |
-|---|---|---|
-| POST | `/api/v1/translate` | Start a new AI translation job |
-| GET | `/api/v1/translate/{id}` | Get translation status & result |
-| GET | `/api/v1/translate/history` | Get user's translation history |
+
+| Method | Endpoint                    | Description                     |
+| ------ | --------------------------- | ------------------------------- |
+| POST   | `/api/v1/translate`         | Start a new AI translation job  |
+| GET    | `/api/v1/translate/{id}`    | Get translation status & result |
+| GET    | `/api/v1/translate/history` | Get user's translation history  |
 
 ### User
-| Method | Endpoint | Description |
-|---|---|---|
-| GET | `/api/v1/user/profile` | Get user profile |
-| PATCH | `/api/v1/user/profile` | Update user profile |
-| GET | `/api/v1/user/usage` | Get daily usage stats (translations remaining) |
+
+| Method | Endpoint               | Description                                    |
+| ------ | ---------------------- | ---------------------------------------------- |
+| GET    | `/api/v1/user/profile` | Get user profile                               |
+| PATCH  | `/api/v1/user/profile` | Update user profile                            |
+| GET    | `/api/v1/user/usage`   | Get daily usage stats (translations remaining) |
 
 ---
 
 ## 6. Key Data Flows
 
 ### AI Translation Flow
+
 ```
 User uploads SRT → Parse file (extract lines) → Validate format
     → Batch lines (50-100 per batch) → For each batch:
@@ -366,6 +371,7 @@ User uploads SRT → Parse file (extract lines) → Validate format
 ```
 
 ### Sync Fixer Flow (Client-Side)
+
 ```
 User uploads File A (timing) + File B (text)
     → Parse both files in browser (srt-parser-2)
@@ -376,6 +382,7 @@ User uploads File A (timing) + File B (text)
 ```
 
 ### Subtitle Search Flow
+
 ```
 User enters search query → Hit /api/v1/subtitles/search
     → Proxy request to OpenSubtitles API v3

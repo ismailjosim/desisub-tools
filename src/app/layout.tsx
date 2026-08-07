@@ -1,26 +1,26 @@
-import type { Metadata } from "next";
-import { Space_Grotesk, Inter, JetBrains_Mono } from "next/font/google";
-import "./globals.css";
-import { Toaster } from "react-hot-toast";
+import type { Metadata } from 'next';
+import { Space_Grotesk, Inter, JetBrains_Mono } from 'next/font/google';
+import './globals.css';
+import { Toaster } from 'react-hot-toast';
 
 const spaceGrotesk = Space_Grotesk({
-  variable: "--font-heading",
-  subsets: ["latin"],
+  variable: '--font-heading',
+  subsets: ['latin'],
 });
 
 const inter = Inter({
-  variable: "--font-body",
-  subsets: ["latin"],
+  variable: '--font-body',
+  subsets: ['latin'],
 });
 
 const jetBrainsMono = JetBrains_Mono({
-  variable: "--font-mono",
-  subsets: ["latin"],
+  variable: '--font-mono',
+  subsets: ['latin'],
 });
 
 export const metadata: Metadata = {
-  title: "DesiSub — AI Subtitle Translator & Sync Fixer",
-  description: "Translate subtitles with AI, fix sync issues, and download subtitles easily.",
+  title: 'DesiSub — AI Subtitle Translator & Sync Fixer',
+  description: 'Translate subtitles with AI, fix sync issues, and download subtitles easily.',
 };
 
 export default function RootLayout({
