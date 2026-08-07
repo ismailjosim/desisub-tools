@@ -1,18 +1,12 @@
-const fs = require("fs");
-const path = require("path");
+/* eslint-disable @typescript-eslint/no-require-imports */
+const fs = require('fs');
+const path = require('path');
 
 const files = [
-  "src/components/Home/index.ts",
-  "src/components/Home/HeroSection.tsx",
-  "src/components/Home/StatsSection.tsx",
-  "src/components/Home/FeaturesSection.tsx",
-  "src/components/Home/HowItWorksSection.tsx",
-  "src/components/Home/CTASection.tsx",
-  "src/components/Home/FeatureCard.tsx",
-  "src/components/Home/StatCard.tsx",
-  "src/components/Home/FloatingOrb.tsx",
-  "src/components/Home/Counter.tsx",
-  "src/components/Home/styles.ts",
+  'src/components/ui/Counter.tsx',
+  'src/components/ui/FloatingOrb.tsx',
+  'src/components/ui/FeatureCard.tsx',
+  'src/components/ui/StatCard.tsx',
 ];
 
 function getComponentName(filePath) {
@@ -26,7 +20,7 @@ function getFileContent(filePath) {
   const componentName = getComponentName(filePath);
 
   // TSX component template
-  if (ext === ".tsx") {
+  if (ext === '.tsx') {
     return `"use client";
 
 const ${componentName} = () => {
@@ -40,11 +34,11 @@ export default ${componentName};
   }
 
   // index.ts template
-  if (path.basename(filePath) === "index.ts") {
-    return "";
+  if (path.basename(filePath) === 'index.ts') {
+    return '';
   }
 
-  return "";
+  return '';
 }
 
 function createFile(filePath) {
@@ -57,11 +51,7 @@ function createFile(filePath) {
 
   // Create file
   if (!fs.existsSync(fullPath)) {
-    fs.writeFileSync(
-      fullPath,
-      getFileContent(filePath),
-      "utf8"
-    );
+    fs.writeFileSync(fullPath, getFileContent(filePath), 'utf8');
 
     console.log(`✅ Created: ${filePath}`);
   } else {
@@ -71,4 +61,4 @@ function createFile(filePath) {
 
 files.forEach(createFile);
 
-console.log("\n🎉 Home component structure created successfully!");
+console.log('\n🎉 Home component structure created successfully!');

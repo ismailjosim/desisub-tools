@@ -39,13 +39,5 @@
     "prettier": "^3.9.6",
     "tailwindcss": "^4",
     "typescript": "^5"
-  },
-  "packageManager": "pnpm@11.19.0",
-  "pnpm": {
-    "onlyBuiltDependencies": [
-      "@prisma/engines",
-      "@prisma/client",
-      "prisma"
-    ]
   }
 }
