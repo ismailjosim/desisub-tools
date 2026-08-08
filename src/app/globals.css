@@ -48,6 +48,7 @@
   --color-card-foreground: hsl(var(--card-foreground));
   --color-popover: hsl(var(--popover));
   --color-popover-foreground: hsl(var(--popover-foreground));
+  --color-surface-elevated: hsl(var(--surface-elevated));
 
   /* Radius */
   --radius-sm: calc(var(--radius) - 4px);
@@ -84,6 +85,10 @@
   --border: 240 12% 88%;
   --input: 240 14% 93%;
   --ring: 252 75% 52%;
+  --surface-elevated: 240 14% 95%;
+
+  --glass-bg: hsla(240, 20%, 99%, 0.85);
+  --glass-border: hsla(240, 14%, 86%, 0.8);
 
   --radius: 0.75rem;
 
@@ -115,6 +120,10 @@
   --border: 240 12% 20%;
   --input: 240 16% 14%;
   --ring: 252 75% 52%;
+  --surface-elevated: 240 16% 13%;
+
+  --glass-bg: hsla(240, 20%, 10%, 0.75);
+  --glass-border: hsla(240, 12%, 22%, 0.6);
 }
 
 @layer base {
@@ -126,21 +135,22 @@
   }
 }
 
-/* Custom classes from design.md — theme-aware */
+/* Custom classes — theme-aware */
 .glass {
-  background: hsla(240, 18%, 12%, 0.6);
+  background: var(--glass-bg);
   backdrop-filter: blur(16px);
-  border: 1px solid hsla(240, 12%, 24%, 0.4);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--glass-border);
 }
 
-:root .glass {
-  background: hsla(240, 20%, 98%, 0.7);
-  backdrop-filter: blur(16px);
-  border: 1px solid hsla(240, 12%, 88%, 0.5);
+.bg-gradient-primary {
+  background-image: linear-gradient(135deg, hsl(252, 85%, 60%) 0%, hsl(265, 80%, 52%) 100%);
+  color: #ffffff !important;
+  box-shadow: 0 4px 14px 0 hsla(252, 85%, 60%, 0.35);
+  transition: all 0.2s ease-in-out;
 }
 
-.dark .glass {
-  background: hsla(240, 18%, 12%, 0.6);
-  backdrop-filter: blur(16px);
-  border: 1px solid hsla(240, 12%, 24%, 0.4);
+.bg-gradient-primary:hover {
+  background-image: linear-gradient(135deg, hsl(252, 90%, 64%) 0%, hsl(265, 85%, 56%) 100%);
+  box-shadow: 0 6px 20px 0 hsla(252, 85%, 60%, 0.45);
 }
