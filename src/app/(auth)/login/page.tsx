@@ -82,7 +82,9 @@ export default function LoginPage() {
 
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
         <div className="space-y-2">
-          <Label htmlFor="email" className="text-foreground font-medium">Email</Label>
+          <Label htmlFor="email" className="text-foreground font-medium">
+            Email
+          </Label>
           <Input
             id="email"
             type="email"
@@ -90,13 +92,20 @@ export default function LoginPage() {
             {...register('email')}
             className="bg-surface-elevated border-border/80 text-foreground placeholder:text-muted-foreground focus-visible:ring-2 focus-visible:ring-primary/50"
           />
-          {errors.email && <p className="text-sm text-destructive font-medium">{errors.email.message}</p>}
+          {errors.email && (
+            <p className="text-sm text-destructive font-medium">{errors.email.message}</p>
+          )}
         </div>
 
         <div className="space-y-2">
           <div className="flex items-center justify-between">
-            <Label htmlFor="password" className="text-foreground font-medium">Password</Label>
-            <Link href="/forgot-password" className="text-xs text-primary hover:underline font-medium">
+            <Label htmlFor="password" className="text-foreground font-medium">
+              Password
+            </Label>
+            <Link
+              href="/forgot-password"
+              className="text-xs text-primary hover:underline font-medium"
+            >
               Forgot password?
             </Link>
           </div>
@@ -106,7 +115,9 @@ export default function LoginPage() {
             {...register('password')}
             className="bg-surface-elevated border-border/80 text-foreground placeholder:text-muted-foreground focus-visible:ring-2 focus-visible:ring-primary/50"
           />
-          {errors.password && <p className="text-sm text-destructive font-medium">{errors.password.message}</p>}
+          {errors.password && (
+            <p className="text-sm text-destructive font-medium">{errors.password.message}</p>
+          )}
         </div>
 
         <Button
@@ -162,7 +173,10 @@ export default function LoginPage() {
 
       <div className="text-center text-sm text-muted-foreground pt-1">
         Don&apos;t have an account?{' '}
-        <Link href="/register" className="text-primary font-medium hover:underline underline-offset-4">
+        <Link
+          href="/register"
+          className="text-primary font-medium hover:underline underline-offset-4"
+        >
           Sign up
         </Link>
       </div>

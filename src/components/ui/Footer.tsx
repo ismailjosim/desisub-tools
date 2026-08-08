@@ -11,7 +11,9 @@ export function Footer() {
               <Subtitles className="h-4 w-4 text-primary-foreground" strokeWidth={2} />
             </div>
             <span className="font-heading text-base font-semibold text-foreground">DesiSub</span>
-            <span className="text-sm text-muted-foreground/50 ml-2">© {new Date().getFullYear()}</span>
+            <span className="text-sm text-muted-foreground/50 ml-2">
+              © {new Date().getFullYear()}
+            </span>
           </div>
 
           <nav className="flex items-center gap-6 text-sm text-muted-foreground/70">

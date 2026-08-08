@@ -90,18 +90,24 @@ export default function RegisterPage() {
 
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
         <div className="space-y-2">
-          <Label htmlFor="name" className="text-foreground font-medium">Name</Label>
+          <Label htmlFor="name" className="text-foreground font-medium">
+            Name
+          </Label>
           <Input
             id="name"
             placeholder="John Doe"
             {...register('name')}
             className="bg-surface-elevated border-border/80 text-foreground placeholder:text-muted-foreground focus-visible:ring-2 focus-visible:ring-primary/50"
           />
-          {errors.name && <p className="text-sm text-destructive font-medium">{errors.name.message}</p>}
+          {errors.name && (
+            <p className="text-sm text-destructive font-medium">{errors.name.message}</p>
+          )}
         </div>
 
         <div className="space-y-2">
-          <Label htmlFor="email" className="text-foreground font-medium">Email</Label>
+          <Label htmlFor="email" className="text-foreground font-medium">
+            Email
+          </Label>
           <Input
             id="email"
             type="email"
@@ -109,22 +115,30 @@ export default function RegisterPage() {
             {...register('email')}
             className="bg-surface-elevated border-border/80 text-foreground placeholder:text-muted-foreground focus-visible:ring-2 focus-visible:ring-primary/50"
           />
-          {errors.email && <p className="text-sm text-destructive font-medium">{errors.email.message}</p>}
+          {errors.email && (
+            <p className="text-sm text-destructive font-medium">{errors.email.message}</p>
+          )}
         </div>
 
         <div className="space-y-2">
-          <Label htmlFor="password" className="text-foreground font-medium">Password</Label>
+          <Label htmlFor="password" className="text-foreground font-medium">
+            Password
+          </Label>
           <Input
             id="password"
             type="password"
             {...register('password')}
             className="bg-surface-elevated border-border/80 text-foreground placeholder:text-muted-foreground focus-visible:ring-2 focus-visible:ring-primary/50"
           />
-          {errors.password && <p className="text-sm text-destructive font-medium">{errors.password.message}</p>}
+          {errors.password && (
+            <p className="text-sm text-destructive font-medium">{errors.password.message}</p>
+          )}
         </div>
 
         <div className="space-y-2">
-          <Label htmlFor="confirmPassword" className="text-foreground font-medium">Confirm Password</Label>
+          <Label htmlFor="confirmPassword" className="text-foreground font-medium">
+            Confirm Password
+          </Label>
           <Input
             id="confirmPassword"
             type="password"

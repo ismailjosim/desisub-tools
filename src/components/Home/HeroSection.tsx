@@ -36,8 +36,9 @@ export function HeroSection() {
         </h1>
 
         <p className="fade-in-up fade-in-up-3 mx-auto max-w-2xl text-lg leading-relaxed text-muted-foreground mb-10">
-          Translate subtitles with AI into natural-sounding Bangla, Hindi &amp; Urdu. Fix sync issues
-          instantly. Download from the world&apos;s largest subtitle database. All in one place.
+          Translate subtitles with AI into natural-sounding Bangla, Hindi &amp; Urdu. Fix sync
+          issues instantly. Download from the world&apos;s largest subtitle database. All in one
+          place.
         </p>
 
         <div className="fade-in-up fade-in-up-4 flex flex-col sm:flex-row items-center justify-center gap-4">
