@@ -10,7 +10,7 @@ interface FeatureCardProps {
 
 export function FeatureCard({ icon: Icon, title, description, gradient, badge }: FeatureCardProps) {
   return (
-    <div className="feature-card group relative overflow-hidden rounded-2xl border border-white/5 bg-white/3 p-8 transition-all duration-300 hover:-translate-y-1 hover:border-white/10 hover:bg-white/6 hover:shadow-2xl">
+    <div className="feature-card group relative overflow-hidden rounded-2xl border border-border bg-foreground/3 p-8 transition-all duration-300 hover:-translate-y-1 hover:border-foreground/10 hover:bg-foreground/6 hover:shadow-2xl">
       <div
         className={cn(
           'absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100 rounded-2xl',
@@ -20,7 +20,7 @@ export function FeatureCard({ icon: Icon, title, description, gradient, badge }:
       />
 
       <div className="relative z-10">
-        <div className="mb-6 inline-flex h-14 w-14 items-center justify-center rounded-xl bg-white/5 ring-1 ring-white/10 transition-all duration-300 group-hover:ring-white/20">
+        <div className="mb-6 inline-flex h-14 w-14 items-center justify-center rounded-xl bg-foreground/5 ring-1 ring-foreground/10 transition-all duration-300 group-hover:ring-foreground/20">
           <Icon className="h-7 w-7 text-primary" strokeWidth={1.5} />
         </div>
 
@@ -30,8 +30,8 @@ export function FeatureCard({ icon: Icon, title, description, gradient, badge }:
           </span>
         )}
 
-        <h3 className="mb-3 font-heading text-xl font-semibold text-white/95">{title}</h3>
-        <p className="text-sm leading-relaxed text-white/55">{description}</p>
+        <h3 className="mb-3 font-heading text-xl font-semibold text-foreground/95">{title}</h3>
+        <p className="text-sm leading-relaxed text-muted-foreground">{description}</p>
       </div>
     </div>
   );

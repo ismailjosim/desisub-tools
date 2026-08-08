@@ -32,11 +32,11 @@ export function HeroSection() {
         <h1 className="fade-in-up fade-in-up-2 font-heading text-5xl font-bold leading-[1.1] tracking-tight sm:text-6xl md:text-7xl mb-6">
           <span className="hero-text-gradient">Subtitle Magic</span>
           <br />
-          <span className="text-white/90">for Desi Cinema</span>
+          <span className="text-foreground/90">for Desi Cinema</span>
         </h1>
 
-        <p className="fade-in-up fade-in-up-3 mx-auto max-w-2xl text-lg leading-relaxed text-white/50 mb-10">
-          Translate subtitles with AI into natural-sounding Bangla, Hindi & Urdu. Fix sync issues
+        <p className="fade-in-up fade-in-up-3 mx-auto max-w-2xl text-lg leading-relaxed text-muted-foreground mb-10">
+          Translate subtitles with AI into natural-sounding Bangla, Hindi &amp; Urdu. Fix sync issues
           instantly. Download from the world&apos;s largest subtitle database. All in one place.
         </p>
 
@@ -44,7 +44,7 @@ export function HeroSection() {
           <Link
             href="/register"
             id="hero-cta-register"
-            className="group flex items-center gap-2 rounded-xl bg-primary px-8 py-4 text-base font-semibold text-white cta-glow transition-all duration-200 hover:scale-[1.03] hover:bg-primary/90"
+            className="group flex items-center gap-2 rounded-xl bg-primary px-8 py-4 text-base font-semibold text-primary-foreground cta-glow transition-all duration-200 hover:scale-[1.03] hover:bg-primary/90"
           >
             Start for Free
             <ArrowRight className="h-4 w-4 transition-transform duration-150 group-hover:translate-x-1" />
@@ -52,24 +52,24 @@ export function HeroSection() {
           <a
             href="#features"
             id="hero-see-features"
-            className="flex items-center gap-2 rounded-xl border border-white/10 bg-white/5 px-8 py-4 text-base font-medium text-white/80 backdrop-blur-sm transition-all duration-200 hover:border-white/20 hover:bg-white/10 hover:text-white"
+            className="flex items-center gap-2 rounded-xl border border-border bg-foreground/5 px-8 py-4 text-base font-medium text-foreground/80 backdrop-blur-sm transition-all duration-200 hover:border-foreground/20 hover:bg-foreground/10 hover:text-foreground"
           >
             <Play className="h-4 w-4" />
             See Features
           </a>
         </div>
 
-        <div className="fade-in-up fade-in-up-4 mt-12 flex items-center justify-center gap-6 text-sm text-white/35">
+        <div className="fade-in-up fade-in-up-4 mt-12 flex items-center justify-center gap-6 text-sm text-muted-foreground/70">
           <span className="flex items-center gap-1.5">
             <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
             No credit card required
           </span>
-          <span className="h-3 w-px bg-white/10" />
+          <span className="h-3 w-px bg-border" />
           <span className="flex items-center gap-1.5">
             <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
             Free tier available
           </span>
-          <span className="h-3 w-px bg-white/10 hidden sm:block" />
+          <span className="h-3 w-px bg-border hidden sm:block" />
           <span className="hidden sm:flex items-center gap-1.5">
             <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
             Open source friendly
@@ -77,7 +77,7 @@ export function HeroSection() {
         </div>
       </div>
 
-      <div className="absolute bottom-0 inset-x-0 h-32 bg-linear-to-t from-[hsl(240,20%,6%)] to-transparent" />
+      <div className="absolute bottom-0 inset-x-0 h-32 bg-linear-to-t from-background to-transparent" />
     </section>
   );
 }

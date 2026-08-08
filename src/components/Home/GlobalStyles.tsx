@@ -10,7 +10,7 @@ export function GlobalStyles() {
         to { opacity: 1; transform: translateY(0); }
       }
       .hero-text-gradient {
-        background: linear-gradient(135deg, #fff 30%, hsl(252, 85%, 72%), hsl(280, 80%, 70%));
+        background: linear-gradient(135deg, hsl(var(--foreground)) 30%, hsl(252, 85%, 72%), hsl(280, 80%, 70%));
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         background-clip: text;
@@ -23,6 +23,18 @@ export function GlobalStyles() {
       }
       .cta-glow:hover {
         box-shadow: 0 0 60px hsla(252, 75%, 52%, 0.5), 0 12px 32px hsla(0,0%,0%,0.5);
+      }
+      .dark .cta-glow {
+        box-shadow: 0 0 40px hsla(252, 75%, 52%, 0.35), 0 8px 24px hsla(0,0%,0%,0.5);
+      }
+      .dark .cta-glow:hover {
+        box-shadow: 0 0 60px hsla(252, 75%, 52%, 0.5), 0 12px 32px hsla(0,0%,0%,0.5);
+      }
+      :root .cta-glow {
+        box-shadow: 0 0 30px hsla(252, 75%, 52%, 0.2), 0 8px 24px hsla(0,0%,0%,0.1);
+      }
+      :root .cta-glow:hover {
+        box-shadow: 0 0 50px hsla(252, 75%, 52%, 0.3), 0 12px 32px hsla(0,0%,0%,0.15);
       }
       .grid-bg {
         background-image: linear-gradient(hsla(252,100%,70%,0.05) 1px, transparent 1px),

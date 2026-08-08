@@ -61,8 +61,41 @@
   --shadow-glow: 0 0 20px hsla(252, 75%, 52%, 0.3);
 }
 
+/* ═══════════════════════════════════════════
+   LIGHT THEME (default)
+   ═══════════════════════════════════════════ */
 :root {
-  /* Enforce Dark Theme Always */
+  --background: 240 20% 98%;
+  --foreground: 240 20% 10%;
+  --card: 0 0% 100%;
+  --card-foreground: 240 20% 10%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 240 20% 10%;
+  --primary: 252 75% 52%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 240 14% 93%;
+  --secondary-foreground: 240 20% 15%;
+  --muted: 240 14% 93%;
+  --muted-foreground: 240 10% 45%;
+  --accent: 38 80% 52%;
+  --accent-foreground: 0 0% 100%;
+  --destructive: 0 75% 55%;
+  --destructive-foreground: 0 0% 100%;
+  --border: 240 12% 88%;
+  --input: 240 14% 93%;
+  --ring: 252 75% 52%;
+
+  --radius: 0.75rem;
+
+  --font-heading: 'Space Grotesk', 'Inter', system-ui, sans-serif;
+  --font-body: 'Inter', 'Segoe UI', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+}
+
+/* ═══════════════════════════════════════════
+   DARK THEME
+   ═══════════════════════════════════════════ */
+.dark {
   --background: 240 20% 6%;
   --foreground: 0 0% 95%;
   --card: 240 18% 10%;
@@ -82,12 +115,6 @@
   --border: 240 12% 20%;
   --input: 240 16% 14%;
   --ring: 252 75% 52%;
-  
-  --radius: 0.75rem;
-
-  --font-heading: 'Space Grotesk', 'Inter', system-ui, sans-serif;
-  --font-body: 'Inter', 'Segoe UI', system-ui, sans-serif;
-  --font-mono: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
 }
 
 @layer base {
@@ -99,8 +126,20 @@
   }
 }
 
-/* Custom classes from design.md */
+/* Custom classes from design.md — theme-aware */
 .glass {
+  background: hsla(240, 18%, 12%, 0.6);
+  backdrop-filter: blur(16px);
+  border: 1px solid hsla(240, 12%, 24%, 0.4);
+}
+
+:root .glass {
+  background: hsla(240, 20%, 98%, 0.7);
+  backdrop-filter: blur(16px);
+  border: 1px solid hsla(240, 12%, 88%, 0.5);
+}
+
+.dark .glass {
   background: hsla(240, 18%, 12%, 0.6);
   backdrop-filter: blur(16px);
   border: 1px solid hsla(240, 12%, 24%, 0.4);

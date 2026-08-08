@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Space_Grotesk, Inter, JetBrains_Mono } from 'next/font/google';
 import './globals.css';
 import { Toaster } from 'react-hot-toast';
+import { NextThemeProvider } from '@/providers/NextThemeProvider';
 
 const spaceGrotesk = Space_Grotesk({
   variable: '--font-heading',
@@ -31,11 +32,14 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${spaceGrotesk.variable} ${inter.variable} ${jetBrainsMono.variable} dark antialiased h-full`}
+      className={`${spaceGrotesk.variable} ${inter.variable} ${jetBrainsMono.variable} antialiased h-full`}
+      suppressHydrationWarning
     >
       <body className="min-h-full flex flex-col bg-background text-foreground">
-        {children}
-        <Toaster position="bottom-right" />
+        <NextThemeProvider>
+          {children}
+          <Toaster position="bottom-right" />
+        </NextThemeProvider>
       </body>
     </html>
   );

@@ -11,7 +11,7 @@ export function StatsSection() {
         }}
       />
       <div className="relative mx-auto max-w-5xl px-6">
-        <div className="rounded-2xl border border-white/5 bg-white/2 p-10 backdrop-blur-sm">
+        <div className="rounded-2xl border border-border bg-foreground/2 p-10 backdrop-blur-sm">
           <div className="grid grid-cols-2 gap-10 sm:grid-cols-4">
             <StatCard value={50000} suffix="+" label="Subtitles Translated" />
             <StatCard value={12} suffix="+" label="Languages Supported" />

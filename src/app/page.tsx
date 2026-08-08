@@ -11,7 +11,7 @@ export default function LandingPage() {
   return (
     <>
       <GlobalStyles />
-      <div className="relative min-h-screen overflow-x-hidden bg-[hsl(240,20%,6%)] text-white">
+      <div className="relative min-h-screen overflow-x-hidden bg-background text-foreground">
         <Navbar />
         <HeroSection />
         <StatsSection />

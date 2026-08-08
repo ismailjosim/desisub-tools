@@ -6,16 +6,16 @@ export function FeaturesSection() {
     <section id="features" className="relative py-28">
       <div className="mx-auto max-w-7xl px-6">
         <div className="mb-16 text-center">
-          <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-sm text-white/50">
+          <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-border bg-foreground/5 px-4 py-1.5 text-sm text-muted-foreground">
             <Globe className="h-3.5 w-3.5" />
             Three Powerful Tools
           </div>
-          <h2 className="font-heading text-4xl font-bold tracking-tight text-white sm:text-5xl">
+          <h2 className="font-heading text-4xl font-bold tracking-tight text-foreground sm:text-5xl">
             Everything you need for
             <br />
             <span className="hero-text-gradient">perfect subtitles</span>
           </h2>
-          <p className="mt-4 text-white/45 text-lg max-w-2xl mx-auto">
+          <p className="mt-4 text-muted-foreground text-lg max-w-2xl mx-auto">
             From AI translation to sync fixing to worldwide search — DesiSub handles the entire
             subtitle workflow.
           </p>
